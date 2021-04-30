@@ -5,14 +5,17 @@ import racingcar.validator.Validator;
 
 public class Car {
 
-	Validator validator = new NameValidator();
-	String name;
+	private String name;
 
 	public Car(String name) {
+		Validator validator = new NameValidator();
 		if (!validator.isValid(name)) {
 			throw new IllegalArgumentException();
 		}
 		this.name = name;
 	}
 
+	public String getName() {
+		return this.name;
+	}
 }

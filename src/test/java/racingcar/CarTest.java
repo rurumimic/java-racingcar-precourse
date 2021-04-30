@@ -8,11 +8,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class CarTest {
 
-	@DisplayName("자동차 생성 성공")
+	@DisplayName("자동차 생성")
 	@ParameterizedTest
 	@ValueSource(strings = {"a", "apple"})
 	void success(String text) {
-		new Car(text);
+		Car car = new Car(text);
+		assertThat(car.getName()).isEqualTo(text);
 	}
 
 	@DisplayName("자동차 생성 실패")
