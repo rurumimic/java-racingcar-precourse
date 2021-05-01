@@ -1,5 +1,7 @@
 package racingcar;
 
+import java.util.List;
+
 import racingcar.state.EndState;
 import racingcar.state.RaceState;
 import racingcar.state.ReadyState;
@@ -22,7 +24,7 @@ public class Game {
 		current = new EndState();
 	}
 
-	public void ready() {
+	public void ready(List<Car> cars) {
 		current = new ReadyState(this);
 	}
 

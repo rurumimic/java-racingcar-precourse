@@ -2,6 +2,8 @@ package racingcar;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +28,8 @@ public class GameTest {
 	@Test
 	void ready() {
 		Game game = new Game();
-		game.ready();
-		assertThat(game.play()).isFalse();
+		game.ready(new ArrayList<>());
+		assertThat(game.play()).isTrue();
 	}
 
 	@DisplayName("경주 시작")
@@ -35,7 +37,7 @@ public class GameTest {
 	void start() {
 		Game game = new Game();
 		game.start();
-		assertThat(game.play()).isFalse();
+		assertThat(game.play()).isTrue();
 	}
 
 }

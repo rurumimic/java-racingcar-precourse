@@ -20,11 +20,18 @@ public class RegisterStateTest {
 		registerState = new RegisterState(game);
 	}
 
-	@DisplayName("게임 종료")
+	@DisplayName("자동차 이름 확인")
 	@ParameterizedTest
-	@ValueSource(strings = {"ABC", "123", ",abcd"})
+	@ValueSource(strings = {"a,b", "a,b,c"})
+	void valid(String text) {
+		assertThat(registerState.validate(text)).isTrue();
+	}
+
+	@DisplayName("자동차 이름 불가")
+	@ParameterizedTest
+	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz",
+		"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
 	void notValid(String text) {
-		registerState.validate(text);
-		assertThat(game.play()).isFalse();
+		assertThat(registerState.validate(text)).isFalse();
 	}
 }

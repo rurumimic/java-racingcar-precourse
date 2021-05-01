@@ -1,6 +1,14 @@
 package racingcar.state;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import racingcar.Car;
 import racingcar.Game;
+import racingcar.enums.Message;
+import racingcar.io.Display;
+import racingcar.io.Keyboard;
+import racingcar.tool.Splitter;
 import racingcar.validator.DuplicationValidator;
 import racingcar.validator.PitstopValidator;
 import racingcar.validator.StandingsValidator;
@@ -18,13 +26,25 @@ public class RegisterState implements State {
 
 	@Override
 	public void action() {
-
+		Display.show(Message.WELCOME);
+		String text = Keyboard.read();
+		if (!validate(text)) {
+			Display.show(validator.alert(text));
+			return;
+		}
+		game.ready(toCars(text));
 	}
 
-	public void validate(String text) {
-		if (!validator.isValid(text)) {
-			game.end();
+	public boolean validate(String text) {
+		return validator.isValid(text);
+	}
+
+	public List<Car> toCars(String text) {
+		List<Car> cars = new ArrayList<>();
+		for (String name : Splitter.split(text)) {
+			cars.add(new Car(name));
 		}
+		return cars;
 	}
 
 }
