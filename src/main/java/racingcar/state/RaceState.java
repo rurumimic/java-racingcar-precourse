@@ -32,7 +32,14 @@ public class RaceState implements State {
 	public void action() {
 		Display.show(Message.START);
 		race(standby());
-		game.end();
+
+		if (!saveLaps(this.laps)) {
+			Display.show(Message.ERROR_SAVE_LAPS);
+			game.end();
+			return;
+		}
+
+		game.podium();
 	}
 
 	private void race(Lap lineup) {
@@ -63,6 +70,10 @@ public class RaceState implements State {
 			record.put(car, prev.get(car).add(Dice.roll()));
 		}
 		return new Lap(record);
+	}
+
+	public boolean saveLaps(List<Lap> laps) {
+		return game.getData().saveLaps(laps);
 	}
 
 }

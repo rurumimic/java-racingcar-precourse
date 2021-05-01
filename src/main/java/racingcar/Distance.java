@@ -1,6 +1,6 @@
 package racingcar;
 
-public class Distance {
+public class Distance implements Comparable<Distance> {
 
 	private int value;
 
@@ -26,5 +26,10 @@ public class Distance {
 	@Override
 	public String toString() {
 		return new String(new char[this.value]).replace("\0", "-");
+	}
+
+	@Override
+	public int compareTo(Distance o) {
+		return Integer.compare(this.value, o.getValue());
 	}
 }

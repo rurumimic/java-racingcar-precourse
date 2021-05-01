@@ -16,7 +16,7 @@ public class Data {
 		return this.cars;
 	}
 
-	public List<Lap> laps() {
+	public List<Lap> getLaps() {
 		return this.laps;
 	}
 

@@ -2,6 +2,7 @@ package racingcar.state;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,10 +20,14 @@ public class RaceStateTest {
 	Game game;
 	RaceState raceState;
 
+	Car apple = new Car("apple");
+	Car baby = new Car("baby");
+	Car candy = new Car("candy");
+
 	@BeforeEach
 	void setup() {
 		game = new Game();
-		List<Car> cars = Arrays.asList(new Car("apple"), new Car("baby"), new Car("candy"));
+		List<Car> cars = Arrays.asList(apple, baby, candy);
 		game.getData().saveCars(cars);
 		game.getData().saveRounds(new Rounds(3));
 		raceState = new RaceState(game);
@@ -48,4 +53,12 @@ public class RaceStateTest {
 		}
 	}
 
+	@DisplayName("경기 기록 저장")
+	@Test
+	void saveLaps() {
+		List<Lap> laps = new ArrayList<>();
+		laps.add(raceState.standby());
+		assertThat(raceState.saveLaps(laps)).isTrue();
+		assertThat(raceState.saveLaps(laps)).isFalse();
+	}
 }

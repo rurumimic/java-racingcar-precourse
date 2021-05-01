@@ -51,4 +51,13 @@ public class DistanceTest {
 		assertThat(new Distance(number).toString()).isEqualTo(text);
 	}
 
+	@DisplayName("이동 거리 비교")
+	@ParameterizedTest
+	@CsvSource(value = {"1:0", "0:1", "2:-1"}, delimiter = ':')
+	void compare(int value, int expected) {
+		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);
+		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);
+		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);
+	}
+
 }

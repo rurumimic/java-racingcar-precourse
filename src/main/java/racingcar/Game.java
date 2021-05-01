@@ -3,6 +3,7 @@ package racingcar;
 import java.util.List;
 
 import racingcar.state.EndState;
+import racingcar.state.PodiumState;
 import racingcar.state.RaceState;
 import racingcar.state.ReadyState;
 import racingcar.state.RegisterState;
@@ -31,6 +32,10 @@ public class Game {
 
 	public void start() {
 		current = new RaceState(this);
+	}
+
+	public void podium() {
+		current = new PodiumState(this);
 	}
 
 	public Data getData() {
