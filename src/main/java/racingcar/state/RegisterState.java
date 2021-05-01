@@ -16,9 +16,9 @@ import racingcar.validator.Validator;
 
 public class RegisterState implements State {
 
-	Validator validator = new DuplicationValidator(new PitstopValidator(new StandingsValidator()));
+	private Validator validator = new DuplicationValidator(new PitstopValidator(new StandingsValidator()));
 
-	Game game;
+	private Game game;
 
 	public RegisterState(Game game) {
 		this.game = game;

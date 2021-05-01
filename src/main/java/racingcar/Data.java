@@ -8,6 +8,18 @@ public class Data {
 	private List<Car> cars;
 	private List<Lap> laps;
 
+	public Rounds getRounds() {
+		return this.rounds;
+	}
+
+	public List<Car> getCars() {
+		return this.cars;
+	}
+
+	public List<Lap> laps() {
+		return this.laps;
+	}
+
 	public boolean saveRounds(Rounds rounds) {
 		if (this.rounds == null) {
 			this.rounds = rounds;

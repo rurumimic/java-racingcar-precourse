@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class DistanceTest {
@@ -31,6 +32,23 @@ public class DistanceTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
 			new Distance(number);
 		});
+	}
+
+	@DisplayName("이동 거리 합")
+	@Test
+	void add() {
+		Distance one = new Distance(1);
+		Distance two = new Distance(2);
+		Distance three = one.add(two);
+		assertThat(three.getValue()).isEqualTo(3);
+	}
+
+	@DisplayName("이동 거리 표시")
+	@ParameterizedTest
+	@CsvSource(value = {"1:-", "3:---"}, delimiter = ':')
+	void graph(int number, String text) {
+		assertThat(new Distance().toString()).isEqualTo("");
+		assertThat(new Distance(number).toString()).isEqualTo(text);
 	}
 
 }

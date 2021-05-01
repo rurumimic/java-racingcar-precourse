@@ -8,7 +8,7 @@ import racingcar.io.Keyboard;
 
 public class ReadyState implements State {
 
-	Game game;
+	private Game game;
 
 	public ReadyState(Game game) {
 		this.game = game;

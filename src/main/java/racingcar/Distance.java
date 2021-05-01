@@ -19,4 +19,12 @@ public class Distance {
 		return this.value;
 	}
 
+	public Distance add(Distance distance) {
+		return new Distance(this.value + distance.getValue());
+	}
+
+	@Override
+	public String toString() {
+		return new String(new char[this.value]).replace("\0", "-");
+	}
 }
