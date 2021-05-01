@@ -9,27 +9,28 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import racingcar.enums.Message;
 
-public class PitstopValidatorTest {
+public class DuplicationValidatorTest {
 
-	Validator validator = new PitstopValidator(new StandingsValidator());
+	Validator validator = new DuplicationValidator(new PitstopValidator(new StandingsValidator()));
 
 	@DisplayName("메세지 확인")
 	@Test
 	void alert() {
-		assertThat(validator.alert()).isEqualTo(Message.PITSTOP.toString());
+		assertThat(validator.alert()).isEqualTo(Message.DUPLICATION.toString());
 	}
 
-	@DisplayName("정규표현식 통과")
+	@DisplayName("서로 다른 문자열")
 	@ParameterizedTest
-	@ValueSource(strings = {"a,b", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t"})
+	@ValueSource(strings = {"a,b,c", "a,ab"})
 	void success(String text) {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("정규표현식 실패")
+	@DisplayName("중복 문자열")
 	@ParameterizedTest
-	@ValueSource(strings = {"a", "a,,,b", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	@ValueSource(strings = {"a,a", "a,b,a", "abc,def,abc"})
 	void fail(String text) {
 		assertThat(validator.isValid(text)).isFalse();
 	}
+
 }
