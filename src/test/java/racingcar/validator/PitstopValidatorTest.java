@@ -9,15 +9,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import racingcar.enums.Message;
 
-public class CandidateValidatorTest {
+public class PitstopValidatorTest {
 
-	Validator lowercase = new LowercaseValidator();
-	Validator validator = new CandidateValidator(lowercase);
+	Validator lowercase = new StandingsValidator();
+	Validator validator = new PitstopValidator(lowercase);
 
 	@DisplayName("메세지 확인")
 	@Test
 	void alert() {
-		assertThat(validator.alert()).isEqualTo(Message.CANDIDATE.toString());
+		assertThat(validator.alert()).isEqualTo(Message.PITSTOP.toString());
 	}
 
 	@DisplayName("정규표현식 통과")
@@ -29,7 +29,7 @@ public class CandidateValidatorTest {
 
 	@DisplayName("정규표현식 실패")
 	@ParameterizedTest
-	@ValueSource(strings = {"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	@ValueSource(strings = {"a", "a,,,b", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
 	void fail(String text) {
 		assertThat(validator.isValid(text)).isFalse();
 	}

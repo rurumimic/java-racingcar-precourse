@@ -1,12 +1,12 @@
 package racingcar.enums;
 
-public enum Candidate {
+public enum Pitstop {
 	MIN(2),
 	MAX(20);
 
 	private int value;
 
-	Candidate(int value) {
+	Pitstop(int value) {
 		this.value = value;
 	}
 
