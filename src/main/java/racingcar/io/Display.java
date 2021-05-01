@@ -1,6 +1,5 @@
 package racingcar.io;
 
-import java.util.Iterator;
 import java.util.List;
 
 import racingcar.Car;
@@ -27,13 +26,14 @@ public final class Display {
 
 	public static void champions(List<Car> cars) {
 		System.out.println(Message.NEWLINE.toString());
+		System.out.print(Message.CHAMPIONS.toString());
 
 		int index;
 		for (index = 0; index < cars.size() - 1; index++) {
 			System.out.printf("%s, ", cars.get(index).getName());
 		}
 
-		System.out.println(String.format(Message.CHAMPIONS.toString(), cars.get(index)));
+		System.out.println(cars.get(index).getName());
 	}
 
 }

@@ -18,6 +18,10 @@ public class Game {
 		current = new RegisterState(this);
 	}
 
+	public void action() {
+		current.action();
+	}
+
 	public boolean play() {
 		return !current.getClass().equals(EndState.class);
 	}
