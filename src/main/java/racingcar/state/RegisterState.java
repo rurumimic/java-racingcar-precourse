@@ -23,7 +23,7 @@ public class RegisterState implements State {
 
 	public void validate(String text) {
 		if (!validator.isValid(text)) {
-			game.toEnd();
+			game.end();
 		}
 	}
 

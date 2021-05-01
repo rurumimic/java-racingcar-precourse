@@ -4,10 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import racingcar.enums.Message;
 
 public class GameTest {
 
@@ -20,9 +16,26 @@ public class GameTest {
 
 	@DisplayName("게임 종료")
 	@Test
-	void toEnd() {
+	void end() {
 		Game game = new Game();
-		game.toEnd();
+		game.end();
 		assertThat(game.play()).isFalse();
 	}
+
+	@DisplayName("게임 라운드 입력")
+	@Test
+	void ready() {
+		Game game = new Game();
+		game.ready();
+		assertThat(game.play()).isFalse();
+	}
+
+	@DisplayName("경주 시작")
+	@Test
+	void start() {
+		Game game = new Game();
+		game.start();
+		assertThat(game.play()).isFalse();
+	}
+
 }
