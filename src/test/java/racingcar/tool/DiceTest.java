@@ -12,7 +12,7 @@ public class DiceTest {
 	@DisplayName("랜덤 숫자: 0, 1")
 	@Test
 	void roll() {
-		assertThat(Dice.roll().getValue()).isBetween(Engine.BRAKES.getValue(), Engine.BRAKES.getValue());
+		assertThat(Dice.roll().getValue()).isBetween(Engine.BRAKES.getValue(), Engine.PEDAL.getValue());
 	}
 
 }
