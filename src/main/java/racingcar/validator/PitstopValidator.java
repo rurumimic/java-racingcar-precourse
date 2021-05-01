@@ -4,7 +4,7 @@ import java.util.List;
 
 import racingcar.enums.Pitstop;
 import racingcar.enums.Message;
-import racingcar.io.Splitter;
+import racingcar.tool.Splitter;
 
 public class PitstopValidator extends Validator {
 
