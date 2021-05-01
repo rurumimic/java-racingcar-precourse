@@ -7,6 +7,9 @@ public enum Message {
 	PITSTOP("등록 가능한 자동차 수는 2 ~ 20개입니다."),
 	DUPLICATION("서로 다른 자동차 이름을 입력하세요."),
 
+	ROUNDS("시도할 회수는 몇 회인가요? (1 ~ 99):"),
+	ROUNDS_RANGE("1 ~ 99 사이의 숫자를 입력하세요."),
+
 	ERROR_SAVE_CARS("자동차 이름 저장 에러 발생."),
 	ERROR_SAVE_ROUNDS("라운드 저장 에러 발생."),
 	ERROR_SAVE_LAPS("랩 저장 에러 발생.");

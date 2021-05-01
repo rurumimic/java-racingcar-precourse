@@ -10,7 +10,7 @@ public class RoundsTest {
 
 	@DisplayName("라운드 생성")
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3})
+	@ValueSource(ints = {1, 2, 99})
 	void success(int number) {
 		Rounds rounds = new Rounds(number);
 		assertThat(rounds.getValue()).isEqualTo(number);
@@ -18,7 +18,7 @@ public class RoundsTest {
 
 	@DisplayName("라운드 생성 실패")
 	@ParameterizedTest
-	@ValueSource(ints = {0, -1, -2})
+	@ValueSource(ints = {0, -1, -2, 100})
 	void fail(int number) {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
 			new Rounds(number);

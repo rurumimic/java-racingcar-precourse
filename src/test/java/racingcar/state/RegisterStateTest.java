@@ -36,7 +36,7 @@ public class RegisterStateTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz",
 		"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
-	void notValid(String text) {
+	void invalid(String text) {
 		assertThat(registerState.validate(text)).isFalse();
 	}
 
