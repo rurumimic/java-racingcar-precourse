@@ -26,11 +26,28 @@ public class DuplicationValidatorTest {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("중복 문자열")
+	@DisplayName("Duplication 문자열")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,a", "a,b,a", "abc,def,abc"})
 	void fail(String text) {
 		assertThat(validator.isValid(text)).isFalse();
+		assertThat(validator.alert(text)).isEqualTo(Message.DUPLICATION.toString());
+	}
+
+	@DisplayName("Pitstop 범위 초과")
+	@ParameterizedTest
+	@ValueSource(strings = {"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	void failInSelf(String text) {
+		assertThat(validator.isValid(text)).isFalse();
+		assertThat(validator.alert(text)).isEqualTo(Message.PITSTOP.toString());
+	}
+
+	@DisplayName("Standings 실패")
+	@ParameterizedTest
+	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz"})
+	void failInSuper(String text) {
+		assertThat(validator.isValid(text)).isFalse();
+		assertThat(validator.alert(text)).isEqualTo(Message.STANDINGS.toString());
 	}
 
 }

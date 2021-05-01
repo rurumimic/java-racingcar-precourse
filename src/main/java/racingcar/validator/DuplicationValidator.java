@@ -7,24 +7,16 @@ import java.util.Set;
 import racingcar.enums.Message;
 import racingcar.tool.Splitter;
 
-public class DuplicationValidator extends Validator {
+public class DuplicationValidator extends ValidatorDecorator {
 
-	Validator validator;
+	String message = Message.DUPLICATION.toString();
 
 	public DuplicationValidator(Validator validator) {
-		this.validator = validator;
+		super(validator);
 	}
 
 	@Override
-	public String alert() {
-		return Message.DUPLICATION.toString();
-	}
-
-	@Override
-	public boolean isValid(String text) {
-		if (!validator.isValid(text)) {
-			return false;
-		}
+	public boolean validate(String text) {
 		List<String> cars = Splitter.split(text);
 		Set<String> set = new HashSet<>(cars);
 		return cars.size() == set.size();

@@ -6,12 +6,10 @@ import racingcar.enums.Message;
 
 public class NameValidator extends Validator {
 
-	public NameValidator() {
-		message = Message.NAME.toString();
-	}
+	String message = Message.NAME.toString();
 
 	@Override
-	public String alert() {
+	public String alert(String text) {
 		return this.message;
 	}
 

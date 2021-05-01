@@ -31,5 +31,6 @@ public class StandingsValidatorTest {
 	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz"})
 	void fail(String text) {
 		assertThat(validator.isValid(text)).isFalse();
+
 	}
 }

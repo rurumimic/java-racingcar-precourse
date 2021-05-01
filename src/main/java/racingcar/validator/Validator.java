@@ -4,7 +4,11 @@ public abstract class Validator {
 
 	String message;
 
-	public abstract String alert();
+	public String alert() {
+		return this.message;
+	}
+
+	public abstract String alert(String text);
 
 	public abstract boolean isValid(String text);
 

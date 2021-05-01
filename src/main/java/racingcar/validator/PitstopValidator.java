@@ -6,24 +6,16 @@ import racingcar.enums.Pitstop;
 import racingcar.enums.Message;
 import racingcar.tool.Splitter;
 
-public class PitstopValidator extends Validator {
+public class PitstopValidator extends ValidatorDecorator {
 
-	Validator validator;
+	String message = Message.PITSTOP.toString();
 
 	public PitstopValidator(Validator validator) {
-		this.validator = validator;
+		super(validator);
 	}
 
 	@Override
-	public String alert() {
-		return Message.PITSTOP.toString();
-	}
-
-	@Override
-	public boolean isValid(String text) {
-		if (!validator.isValid(text)) {
-			return false;
-		}
+	public boolean validate(String text) {
 		List<String> cars = Splitter.split(text);
 		return cars.size() >= Pitstop.MIN.getValue() && cars.size() <= Pitstop.MAX.getValue();
 	}

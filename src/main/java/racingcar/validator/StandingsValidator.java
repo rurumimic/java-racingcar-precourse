@@ -6,9 +6,11 @@ import racingcar.enums.Message;
 
 public class StandingsValidator extends Validator {
 
+	String message = Message.STANDINGS.toString();
+
 	@Override
-	public String alert() {
-		return Message.STANDINGS.toString();
+	public String alert(String text) {
+		return this.message;
 	}
 
 	@Override
