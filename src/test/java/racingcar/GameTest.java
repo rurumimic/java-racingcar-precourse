@@ -28,7 +28,7 @@ public class GameTest {
 	@Test
 	void ready() {
 		Game game = new Game();
-		game.ready(new ArrayList<>());
+		game.ready();
 		assertThat(game.play()).isTrue();
 	}
 

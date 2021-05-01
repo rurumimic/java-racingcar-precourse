@@ -28,15 +28,27 @@ public class RegisterState implements State {
 	public void action() {
 		Display.show(Message.WELCOME);
 		String text = Keyboard.read();
+
 		if (!validate(text)) {
 			Display.show(validator.alert(text));
 			return;
 		}
-		game.ready(toCars(text));
+
+		if (!saveCars(toCars(text))) {
+			Display.show(Message.ERROR_SAVE_CARS);
+			game.end();
+			return;
+		}
+
+		game.ready();
 	}
 
 	public boolean validate(String text) {
 		return validator.isValid(text);
+	}
+
+	public boolean saveCars(List<Car> cars) {
+		return game.getData().saveCars(cars);
 	}
 
 	public List<Car> toCars(String text) {

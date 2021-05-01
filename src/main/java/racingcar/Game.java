@@ -11,6 +11,7 @@ import racingcar.state.State;
 public class Game {
 
 	private State current;
+	private Data data = new Data();
 
 	public Game() {
 		current = new RegisterState(this);
@@ -24,12 +25,16 @@ public class Game {
 		current = new EndState();
 	}
 
-	public void ready(List<Car> cars) {
+	public void ready() {
 		current = new ReadyState(this);
 	}
 
 	public void start() {
 		current = new RaceState(this);
+	}
+
+	public Data getData() {
+		return data;
 	}
 
 }
