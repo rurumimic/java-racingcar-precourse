@@ -1,14 +1,16 @@
 package racingcar.validator;
 
+import racingcar.enums.Message;
+
 public abstract class Validator {
 
-	String message;
+	Message message;
 
-	public String alert() {
+	public Message alert() {
 		return this.message;
 	}
 
-	public abstract String alert(String text);
+	public abstract Message alert(String text);
 
 	public abstract boolean isValid(String text);
 

@@ -16,7 +16,7 @@ public class NameValidatorTest {
 	@DisplayName("메세지 확인")
 	@Test
 	void alert() {
-		assertThat(validator.alert()).isEqualTo(Message.NAME.toString());
+		assertThat(validator.alert()).isEqualTo(Message.NAME);
 	}
 
 	@DisplayName("정규표현식 통과")

@@ -16,7 +16,7 @@ public class PitstopValidatorTest {
 	@DisplayName("메세지 확인")
 	@Test
 	void alert() {
-		assertThat(validator.alert()).isEqualTo(Message.PITSTOP.toString());
+		assertThat(validator.alert()).isEqualTo(Message.PITSTOP);
 	}
 
 	@DisplayName("정규표현식 통과")
@@ -28,18 +28,18 @@ public class PitstopValidatorTest {
 
 	@DisplayName("Pitstop 범위 초과")
 	@ParameterizedTest
-	@ValueSource(strings = {"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
-	void failInSelf(String text) {
+	@ValueSource(strings = {"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	void failInPitstop(String text) {
 		assertThat(validator.isValid(text)).isFalse();
-		assertThat(validator.alert(text)).isEqualTo(Message.PITSTOP.toString());
+		assertThat(validator.alert(text)).isEqualTo(Message.PITSTOP);
 	}
 
 	@DisplayName("Standings 실패")
 	@ParameterizedTest
 	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz"})
-	void failInSuper(String text) {
+	void failInStandings(String text) {
 		assertThat(validator.isValid(text)).isFalse();
-		assertThat(validator.alert(text)).isEqualTo(Message.STANDINGS.toString());
+		assertThat(validator.alert(text)).isEqualTo(Message.STANDINGS);
 	}
 
 }

@@ -1,5 +1,7 @@
 package racingcar.validator;
 
+import racingcar.enums.Message;
+
 public abstract class ValidatorDecorator extends Validator {
 
 	Validator validator;
@@ -9,9 +11,9 @@ public abstract class ValidatorDecorator extends Validator {
 	}
 
 	@Override
-	public String alert(String text) {
+	public Message alert(String text) {
 		if (!validator.isValid(text)) {
-			return validator.message;
+			return validator.alert(text);
 		}
 		return this.message;
 	}

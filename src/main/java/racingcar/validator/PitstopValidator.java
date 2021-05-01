@@ -8,10 +8,9 @@ import racingcar.tool.Splitter;
 
 public class PitstopValidator extends ValidatorDecorator {
 
-	String message = Message.PITSTOP.toString();
-
 	public PitstopValidator(Validator validator) {
 		super(validator);
+		this.message = Message.PITSTOP;
 	}
 
 	@Override

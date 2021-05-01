@@ -9,10 +9,9 @@ import racingcar.tool.Splitter;
 
 public class DuplicationValidator extends ValidatorDecorator {
 
-	String message = Message.DUPLICATION.toString();
-
 	public DuplicationValidator(Validator validator) {
 		super(validator);
+		this.message = Message.DUPLICATION;
 	}
 
 	@Override

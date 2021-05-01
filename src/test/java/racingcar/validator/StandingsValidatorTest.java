@@ -16,7 +16,7 @@ public class StandingsValidatorTest {
 	@DisplayName("메세지 확인")
 	@Test
 	void alert() {
-		assertThat(validator.alert()).isEqualTo(Message.STANDINGS.toString());
+		assertThat(validator.alert()).isEqualTo(Message.STANDINGS);
 	}
 
 	@DisplayName("정규표현식 통과")
