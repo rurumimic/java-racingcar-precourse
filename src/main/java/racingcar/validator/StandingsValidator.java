@@ -17,6 +17,6 @@ public class StandingsValidator extends Validator {
 
 	@Override
 	public boolean isValid(String text) {
-		return Pattern.matches("^[a-z]{1,5}(,[a-z]{1,5})+$", text);
+		return Pattern.matches("^[a-z]+(,[a-z]+)*$", text);
 	}
 }

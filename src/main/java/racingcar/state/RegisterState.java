@@ -10,13 +10,15 @@ import racingcar.io.Display;
 import racingcar.io.Keyboard;
 import racingcar.tool.Splitter;
 import racingcar.validator.DuplicationValidator;
+import racingcar.validator.NamesValidator;
 import racingcar.validator.PitstopValidator;
 import racingcar.validator.StandingsValidator;
 import racingcar.validator.Validator;
 
 public class RegisterState implements State {
 
-	private Validator validator = new DuplicationValidator(new PitstopValidator(new StandingsValidator()));
+	private Validator validator = new NamesValidator(
+		new DuplicationValidator(new PitstopValidator(new StandingsValidator())));
 
 	private Game game;
 

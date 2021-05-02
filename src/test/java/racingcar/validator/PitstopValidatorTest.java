@@ -19,16 +19,16 @@ public class PitstopValidatorTest {
 		assertThat(validator.alert()).isEqualTo(Message.PITSTOP);
 	}
 
-	@DisplayName("정규표현식 통과")
+	@DisplayName("Pitstop 범위 내")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,b", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t"})
 	void success(String text) {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("Pitstop 범위 초과")
+	@DisplayName("Pitstop 범위 밖")
 	@ParameterizedTest
-	@ValueSource(strings = {"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	@ValueSource(strings = {"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
 	void failInPitstop(String text) {
 		assertThat(validator.isValid(text)).isFalse();
 		assertThat(validator.alert(text)).isEqualTo(Message.PITSTOP);
@@ -36,7 +36,7 @@ public class PitstopValidatorTest {
 
 	@DisplayName("Standings 실패")
 	@ParameterizedTest
-	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz"})
+	@ValueSource(strings = {"", "a,", ",a", "a,b,", "a,,b"})
 	void failInStandings(String text) {
 		assertThat(validator.isValid(text)).isFalse();
 		assertThat(validator.alert(text)).isEqualTo(Message.STANDINGS);

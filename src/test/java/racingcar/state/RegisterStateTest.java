@@ -34,7 +34,7 @@ public class RegisterStateTest {
 
 	@DisplayName("자동차 이름 불가")
 	@ParameterizedTest
-	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz",
+	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "a,abcdef",
 		"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
 	void invalid(String text) {
 		assertThat(registerState.validate(text)).isFalse();

@@ -28,9 +28,8 @@ public class StandingsValidatorTest {
 
 	@DisplayName("정규표현식 실패")
 	@ParameterizedTest
-	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "abcdef,uvwxyz"})
+	@ValueSource(strings = {"", "a,", ",a", "a,b,", "a,,b"})
 	void fail(String text) {
 		assertThat(validator.isValid(text)).isFalse();
-
 	}
 }
