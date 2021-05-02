@@ -4,9 +4,9 @@ public enum Message {
 	NEWLINE(""),
 
 	/* Register State */
-	WELCOME("\n경주할 자동차 목록을 영어 소문자로 입력하세요. 자동차는 쉼표로 구분합니다:"),
+	WELCOME("\n경주할 자동차 이름을 영어 소문자로 입력하세요. (이름은 쉼표 기준으로 구분):"),
 	NAME("이름은 영어 소문자 5글자 이내로 입력하세요."),
-	STANDINGS("자동차 목록은 영어 소문자와 쉼표만으로 구분하세요."),
+	STANDINGS("자동차 목록은 영어 소문자와 쉼표만으로 입력하세요."),
 	PITSTOP("등록 가능한 자동차 수는 2 ~ 20개입니다."),
 	DUPLICATION("서로 다른 자동차 이름을 입력하세요."),
 
@@ -19,7 +19,7 @@ public enum Message {
 	BROADCAST("%5s : %s"),
 
 	/* Prize State */
-	CHAMPIONS("우승자 : "),
+	CHAMPIONS("가 최종 우승했습니다."),
 
 	/* ERRORS */
 	ERROR_SAVE_CARS("\n자동차 이름 저장 에러 발생."),

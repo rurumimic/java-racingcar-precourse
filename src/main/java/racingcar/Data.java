@@ -8,15 +8,15 @@ public class Data {
 	private List<Car> cars;
 	private List<Lap> laps;
 
-	public Rounds getRounds() {
+	public Rounds loadRounds() {
 		return this.rounds;
 	}
 
-	public List<Car> getCars() {
+	public List<Car> loadCars() {
 		return this.cars;
 	}
 
-	public List<Lap> getLaps() {
+	public List<Lap> loadLaps() {
 		return this.laps;
 	}
 

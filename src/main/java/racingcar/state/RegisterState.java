@@ -50,7 +50,7 @@ public class RegisterState implements State {
 	}
 
 	public boolean saveCars(List<Car> cars) {
-		return game.getData().saveCars(cars);
+		return game.storage().saveCars(cars);
 	}
 
 	public List<Car> toCars(String text) {

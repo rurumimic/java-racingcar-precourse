@@ -6,11 +6,17 @@ import racingcar.Distance;
 import racingcar.enums.Engine;
 
 public final class Dice {
-	public static Distance roll() {
+
+	private static boolean shiftGears() {
 		Random random = new Random();
-		if (random.nextInt(Engine.GAS.getValue()) > Engine.CLUTCH.getValue()) {
+		return random.nextInt(Engine.RPM.getValue()) > Engine.CLUTCH.getValue();
+	}
+
+	public static Distance roll() {
+		if (shiftGears()) {
 			return new Distance(Engine.PEDAL.getValue());
 		}
 		return new Distance();
 	}
+
 }

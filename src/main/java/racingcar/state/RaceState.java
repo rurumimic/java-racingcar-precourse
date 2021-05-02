@@ -23,8 +23,8 @@ public class RaceState implements State {
 
 	public RaceState(Game game) {
 		this.game = game;
-		this.cars = game.getData().getCars();
-		this.rounds = game.getData().getRounds();
+		this.cars = game.storage().loadCars();
+		this.rounds = game.storage().loadRounds();
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class RaceState implements State {
 	}
 
 	public boolean saveLaps(List<Lap> laps) {
-		return game.getData().saveLaps(laps);
+		return game.storage().saveLaps(laps);
 	}
 
 }

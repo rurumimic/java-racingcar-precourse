@@ -1,7 +1,7 @@
 package racingcar.enums;
 
 public enum Engine {
-	GAS(10),
+	RPM(10),
 	CLUTCH(3),
 	BRAKES(0),
 	PEDAL(1);

@@ -2,7 +2,6 @@ package racingcar.state;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,8 +11,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import racingcar.Car;
 import racingcar.Distance;
@@ -44,8 +41,8 @@ public class PodiumStateTest {
 	@BeforeEach
 	void setup() {
 		game = new Game();
-		game.getData().saveCars(cars);
-		game.getData().saveLaps(laps);
+		game.storage().saveCars(cars);
+		game.storage().saveLaps(laps);
 		podiumState = new PodiumState(game);
 	}
 

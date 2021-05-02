@@ -47,6 +47,6 @@ public class ReadyState implements State {
 	}
 
 	public boolean saveRounds(Rounds rounds) {
-		return game.getData().saveRounds(rounds);
+		return game.storage().saveRounds(rounds);
 	}
 }

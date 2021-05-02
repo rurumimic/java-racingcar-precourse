@@ -1,7 +1,6 @@
 package racingcar.state;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,8 @@ public class PodiumState implements State {
 
 	public PodiumState(Game game) {
 		this.game = game;
-		this.cars = game.getData().getCars();
-		for (Lap lap : game.getData().getLaps()) {
+		this.cars = game.storage().loadCars();
+		for (Lap lap : game.storage().loadLaps()) {
 			this.finish = lap.getRecord();
 		}
 	}

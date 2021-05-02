@@ -28,8 +28,8 @@ public class RaceStateTest {
 	void setup() {
 		game = new Game();
 		List<Car> cars = Arrays.asList(apple, baby, candy);
-		game.getData().saveCars(cars);
-		game.getData().saveRounds(new Rounds(3));
+		game.storage().saveCars(cars);
+		game.storage().saveRounds(new Rounds(3));
 		raceState = new RaceState(game);
 	}
 

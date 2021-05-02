@@ -1,7 +1,5 @@
 package racingcar;
 
-import java.util.List;
-
 import racingcar.state.EndState;
 import racingcar.state.PodiumState;
 import racingcar.state.RaceState;
@@ -11,38 +9,38 @@ import racingcar.state.State;
 
 public class Game {
 
-	private State current;
+	private State state;
 	private Data data = new Data();
 
 	public Game() {
-		current = new RegisterState(this);
+		state = new RegisterState(this);
 	}
 
 	public void action() {
-		current.action();
+		state.action();
 	}
 
-	public boolean play() {
-		return !current.getClass().equals(EndState.class);
+	public boolean on() {
+		return !state.getClass().equals(EndState.class);
 	}
 
 	public void end() {
-		current = new EndState();
+		state = new EndState();
 	}
 
 	public void ready() {
-		current = new ReadyState(this);
+		state = new ReadyState(this);
 	}
 
 	public void start() {
-		current = new RaceState(this);
+		state = new RaceState(this);
 	}
 
 	public void podium() {
-		current = new PodiumState(this);
+		state = new PodiumState(this);
 	}
 
-	public Data getData() {
+	public Data storage() {
 		return data;
 	}
 

@@ -26,14 +26,14 @@ public final class Display {
 
 	public static void champions(List<Car> cars) {
 		System.out.println(Message.NEWLINE.toString());
-		System.out.print(Message.CHAMPIONS.toString());
 
 		int index;
 		for (index = 0; index < cars.size() - 1; index++) {
 			System.out.printf("%s, ", cars.get(index).getName());
 		}
 
-		System.out.println(cars.get(index).getName());
+		System.out.printf("%s", cars.get(index).getName());
+		System.out.print(Message.CHAMPIONS.toString());
 	}
 
 }
