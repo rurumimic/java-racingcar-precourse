@@ -9,7 +9,7 @@ public class GameTest {
 
 	@DisplayName("게임 생성")
 	@Test
-	void play() {
+	void on() {
 		Game game = new Game();
 		assertThat(game.on()).isTrue();
 	}
@@ -35,6 +35,14 @@ public class GameTest {
 	void start() {
 		Game game = new Game();
 		game.start();
+		assertThat(game.on()).isTrue();
+	}
+
+	@DisplayName("우승 발표")
+	@Test
+	void podium() {
+		Game game = new Game();
+		game.podium();
 		assertThat(game.on()).isTrue();
 	}
 
