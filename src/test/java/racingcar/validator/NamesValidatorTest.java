@@ -19,14 +19,14 @@ public class NamesValidatorTest {
 		assertThat(validator.alert()).isEqualTo(Message.NAME);
 	}
 
-	@DisplayName("자동차 이름 가능")
+	@DisplayName("통과: 글자 1 ~ 5")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,b,c", "a,ab"})
 	void success(String text) {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("이름 글자수 초과")
+	@DisplayName("실패: 글자 > 5")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,abcdef"})
 	void failInNames(String text) {
@@ -34,27 +34,27 @@ public class NamesValidatorTest {
 		assertThat(validator.alert(text)).isEqualTo(Message.NAME);
 	}
 
-	@DisplayName("Duplication 문자열")
+	@DisplayName("실패: 중복 이름")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,a", "a,b,a", "abc,def,abc"})
-	void failInDuplication(String text) {
-		assertThat(validator.isValid(text)).isFalse();
-		assertThat(validator.alert(text)).isEqualTo(Message.DUPLICATION);
+	void invalidAtDuplication(String text) {
+		DuplicationValidatorTest test = new DuplicationValidatorTest();
+		test.invalid(text);
 	}
 
-	@DisplayName("Pitstop 범위 밖")
+	@DisplayName("실패: 이름 < 1, 이름 > 20")
 	@ParameterizedTest
 	@ValueSource(strings = {"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
-	void failInPitstop(String text) {
-		assertThat(validator.isValid(text)).isFalse();
-		assertThat(validator.alert(text)).isEqualTo(Message.PITSTOP);
+	void invalidAtPitstop(String text) {
+		PitstopValidatorTest test = new PitstopValidatorTest();
+		test.invalid(text);
 	}
 
-	@DisplayName("Standings 실패")
+	@DisplayName("실패: 공백 포함")
 	@ParameterizedTest
 	@ValueSource(strings = {"", "a,", ",a", "a,b,", "a,,b"})
-	void failInStandings(String text) {
-		assertThat(validator.isValid(text)).isFalse();
-		assertThat(validator.alert(text)).isEqualTo(Message.STANDINGS);
+	void invalidAtStandings(String text) {
+		StandingsValidatorTest test = new StandingsValidatorTest();
+		test.invalid(text);
 	}
 }

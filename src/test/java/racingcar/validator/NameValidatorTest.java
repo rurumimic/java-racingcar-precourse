@@ -19,17 +19,17 @@ public class NameValidatorTest {
 		assertThat(validator.alert()).isEqualTo(Message.NAME);
 	}
 
-	@DisplayName("정규표현식 통과")
+	@DisplayName("통과: 글자 1 ~ 5")
 	@ParameterizedTest
 	@ValueSource(strings = {"a", "apple"})
-	void success(String text) {
+	void valid(String text) {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("정규표현식 실패")
+	@DisplayName("실패: 글자 < 0, 글자 > 5")
 	@ParameterizedTest
 	@ValueSource(strings = {"", "abcdef", "ABC", "999", "?!"})
-	void fail(String text) {
+	void invalid(String text) {
 		assertThat(validator.isValid(text)).isFalse();
 	}
 

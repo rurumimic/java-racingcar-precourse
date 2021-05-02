@@ -12,19 +12,19 @@ import org.junit.jupiter.api.Test;
 public class LapTest {
 
 	Map<Car, Distance> record;
-
-	Car apple = new Car("apple");
+	Car apple;
 	Distance distance = new Distance();
 
 	@BeforeEach
 	void setup() {
 		record = new HashMap<>();
+		apple = new Car("apple");
 		record.put(apple, distance);
 	}
 
 	@DisplayName("Lap 생성")
 	@Test
-	void create() {
+	void newLap() {
 		Lap lap = new Lap(record);
 		assertThat(lap.getRecord().get(apple).getValue()).isEqualTo(0);
 	}

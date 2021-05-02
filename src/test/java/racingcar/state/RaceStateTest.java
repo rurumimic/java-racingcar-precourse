@@ -14,26 +14,34 @@ import racingcar.Car;
 import racingcar.Game;
 import racingcar.Lap;
 import racingcar.Rounds;
+import racingcar.dice.OnlyOneDice;
+import racingcar.dice.OnlyZeroDice;
 
 public class RaceStateTest {
 
 	Game game;
 	RaceState raceState;
 
-	Car apple = new Car("apple");
-	Car baby = new Car("baby");
-	Car candy = new Car("candy");
+	Car apple, baby, candy;
+	List<Car> cars;
+
+	void createCars() {
+		apple = new Car("apple");
+		baby = new Car("baby");
+		candy = new Car("candy");
+		cars = Arrays.asList(apple, baby, candy);
+	}
 
 	@BeforeEach
 	void setup() {
 		game = new Game();
-		List<Car> cars = Arrays.asList(apple, baby, candy);
+		createCars();
 		game.storage().saveCars(cars);
 		game.storage().saveRounds(new Rounds(3));
 		raceState = new RaceState(game);
 	}
 
-	@DisplayName("자동차 정렬")
+	@DisplayName("경기 시작 전 자동차 정렬")
 	@Test
 	void standby() {
 		Lap lap = raceState.standby();
@@ -42,14 +50,25 @@ public class RaceStateTest {
 		}
 	}
 
-	@DisplayName("자동차 주행")
+	@DisplayName("모든 자동차 정지")
 	@Test
-	void drive() {
+	void stop() {
 		Lap prev = raceState.standby();
-		Lap next = raceState.drive(prev.getRecord());
+		Lap next = raceState.drive(prev.getRecord(), new OnlyZeroDice());
 
 		for (Car car : next.getRecord().keySet()) {
-			assertThat(next.getRecord().get(car).getValue()).isBetween(0, 1);
+			assertThat(next.getRecord().get(car).getValue()).isEqualTo(0);
+		}
+	}
+
+	@DisplayName("모든 자동차 이동")
+	@Test
+	void move() {
+		Lap prev = raceState.standby();
+		Lap next = raceState.drive(prev.getRecord(), new OnlyOneDice());
+
+		for (Car car : next.getRecord().keySet()) {
+			assertThat(next.getRecord().get(car).getValue()).isEqualTo(1);
 		}
 	}
 

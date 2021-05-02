@@ -9,7 +9,6 @@ import racingcar.Car;
 import racingcar.Distance;
 import racingcar.Game;
 import racingcar.Lap;
-import racingcar.enums.Message;
 import racingcar.io.Display;
 
 public class PodiumState implements State {
@@ -21,6 +20,7 @@ public class PodiumState implements State {
 	public PodiumState(Game game) {
 		this.game = game;
 		this.cars = game.storage().loadCars();
+
 		for (Lap lap : game.storage().loadLaps()) {
 			this.finish = lap.getRecord();
 		}
@@ -28,12 +28,8 @@ public class PodiumState implements State {
 
 	@Override
 	public void action() {
-		game.end();
-		if (this.finish == null) {
-			Display.show(Message.ERROR_SAVE_LAPS);
-			return;
-		}
 		Display.champions(champions());
+		game.end();
 	}
 
 	public List<Car> champions() {

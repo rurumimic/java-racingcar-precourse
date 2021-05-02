@@ -21,10 +21,13 @@ public enum Message {
 	/* Prize State */
 	CHAMPIONS("가 최종 우승했습니다."),
 
+	/* Distance */
+	DISTANCE_RANGE("최소 거리는 0 입니다."),
+
 	/* ERRORS */
-	ERROR_SAVE_CARS("\n자동차 이름 저장 에러 발생."),
-	ERROR_SAVE_ROUNDS("\n라운드 저장 에러 발생."),
-	ERROR_SAVE_LAPS("\n랩 저장 에러 발생.");
+	ERROR_SAVE_CARS("\n자동차 이름 저장 에러."),
+	ERROR_SAVE_ROUNDS("\n라운드 저장 에러."),
+	ERROR_SAVE_LAPS("\n랩 저장 에러.");
 
 	private String message;
 

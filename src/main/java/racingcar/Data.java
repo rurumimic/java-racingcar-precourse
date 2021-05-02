@@ -2,6 +2,11 @@ package racingcar;
 
 import java.util.List;
 
+import racingcar.enums.Message;
+import racingcar.exceptions.CarsSaveException;
+import racingcar.exceptions.LapsSaveException;
+import racingcar.exceptions.RoundsSaveException;
+
 public class Data {
 
 	private Rounds rounds;
@@ -20,27 +25,25 @@ public class Data {
 		return this.laps;
 	}
 
-	public boolean saveRounds(Rounds rounds) {
-		if (this.rounds == null) {
-			this.rounds = rounds;
-			return true;
+	public void saveRounds(Rounds rounds) {
+		if (this.rounds != null) {
+			throw new RoundsSaveException(Message.ERROR_SAVE_ROUNDS.toString());
 		}
-		return false;
+		this.rounds = rounds;
 	}
 
-	public boolean saveCars(List<Car> cars) {
-		if (this.cars == null) {
-			this.cars = cars;
-			return true;
+	public void saveCars(List<Car> cars) {
+		if (this.cars != null) {
+			throw new CarsSaveException(Message.ERROR_SAVE_CARS.toString());
 		}
-		return false;
+		this.cars = cars;
 	}
 
-	public boolean saveLaps(List<Lap> laps) {
-		if (this.laps == null) {
-			this.laps = laps;
-			return true;
+	public void saveLaps(List<Lap> laps) {
+		if (this.laps != null) {
+			throw new LapsSaveException(Message.ERROR_SAVE_LAPS.toString());
 		}
-		return false;
+		this.laps = laps;
 	}
+
 }

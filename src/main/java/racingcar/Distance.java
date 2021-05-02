@@ -1,5 +1,8 @@
 package racingcar;
 
+import racingcar.enums.Message;
+import racingcar.exceptions.DistanceOutOfBoundsException;
+
 public class Distance implements Comparable<Distance> {
 
 	private int value;
@@ -10,7 +13,7 @@ public class Distance implements Comparable<Distance> {
 
 	public Distance(int value) {
 		if (value < 0) {
-			throw new IllegalArgumentException();
+			throw new DistanceOutOfBoundsException(Message.DISTANCE_RANGE.toString());
 		}
 		this.value = value;
 	}

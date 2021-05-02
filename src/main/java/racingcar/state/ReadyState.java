@@ -3,6 +3,8 @@ package racingcar.state;
 import racingcar.Game;
 import racingcar.Rounds;
 import racingcar.enums.Message;
+import racingcar.exceptions.RoundsOutOfBoundsException;
+import racingcar.exceptions.RoundsSaveException;
 import racingcar.io.Display;
 import racingcar.io.Keyboard;
 
@@ -19,34 +21,26 @@ public class ReadyState implements State {
 		Display.show(Message.ROUNDS);
 		String text = Keyboard.read();
 
-		if (!validate(text)) {
-			Display.show(Message.ROUNDS_RANGE);
-			return;
+		if (saveRounds(text)) {
+			game.start();
 		}
+	}
 
-		if (!saveRounds(toRounds(text))) {
+	public boolean saveRounds(String text) {
+		try {
+			game.storage().saveRounds(toRounds(text));
+			return true;
+		} catch (RoundsOutOfBoundsException | NumberFormatException e) {
+			Display.show(Message.ROUNDS_RANGE);
+		} catch (RoundsSaveException e) {
 			Display.show(Message.ERROR_SAVE_ROUNDS);
 			game.end();
-			return;
 		}
-
-		game.start();
+		return false;
 	}
 
 	public Rounds toRounds(String text) {
 		return new Rounds(Integer.parseInt(text));
 	}
 
-	public boolean validate(String text) {
-		try {
-			toRounds(text);
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean saveRounds(Rounds rounds) {
-		return game.storage().saveRounds(rounds);
-	}
 }

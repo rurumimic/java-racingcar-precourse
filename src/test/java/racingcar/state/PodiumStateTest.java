@@ -16,31 +16,42 @@ import racingcar.Car;
 import racingcar.Distance;
 import racingcar.Game;
 import racingcar.Lap;
+import racingcar.exceptions.CarsSaveException;
+import racingcar.exceptions.InvalidCarNameException;
+import racingcar.exceptions.LapsSaveException;
 
 public class PodiumStateTest {
 
 	Game game;
 	PodiumState podiumState;
+	Car apple, baby, candy, dog;
+	List<Car> cars;
+	Map<Car, Distance> finish;
+	List<Lap> laps;
 
-	Car apple = new Car("apple");
-	Car baby = new Car("baby");
-	Car candy = new Car("candy");
-	Car dog = new Car("dog");
+	void createCars() {
+		apple = new Car("apple");
+		baby = new Car("baby");
+		candy = new Car("candy");
+		dog = new Car("dog");
+		cars = Arrays.asList(apple, baby, candy, dog);
+	}
 
-	List<Car> cars = Arrays.asList(apple, baby, candy, dog);
-
-	Map<Car, Distance> finish = new HashMap<Car, Distance>() {{
-		put(apple, new Distance(3));
-		put(baby, new Distance(1));
-		put(candy, new Distance(3));
-		put(dog, new Distance(2));
-	}};
-
-	List<Lap> laps = Collections.singletonList(new Lap(finish));
+	void createLaps() {
+		finish = new HashMap<Car, Distance>() {{
+			put(apple, new Distance(3));
+			put(baby, new Distance(1));
+			put(candy, new Distance(3));
+			put(dog, new Distance(2));
+		}};
+		laps = Collections.singletonList(new Lap(finish));
+	}
 
 	@BeforeEach
 	void setup() {
 		game = new Game();
+		createCars();
+		createLaps();
 		game.storage().saveCars(cars);
 		game.storage().saveLaps(laps);
 		podiumState = new PodiumState(game);

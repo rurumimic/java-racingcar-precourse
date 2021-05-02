@@ -6,6 +6,8 @@ import java.util.List;
 import racingcar.Car;
 import racingcar.Game;
 import racingcar.enums.Message;
+import racingcar.exceptions.CarsSaveException;
+import racingcar.exceptions.InvalidCarNameException;
 import racingcar.io.Display;
 import racingcar.io.Keyboard;
 import racingcar.tool.Splitter;
@@ -36,21 +38,26 @@ public class RegisterState implements State {
 			return;
 		}
 
-		if (!saveCars(toCars(text))) {
-			Display.show(Message.ERROR_SAVE_CARS);
-			game.end();
-			return;
+		if (saveCars(text)) {
+			game.ready();
 		}
-
-		game.ready();
 	}
 
 	public boolean validate(String text) {
 		return validator.isValid(text);
 	}
 
-	public boolean saveCars(List<Car> cars) {
-		return game.storage().saveCars(cars);
+	public boolean saveCars(String text) {
+		try {
+			game.storage().saveCars(toCars(text));
+			return true;
+		} catch (InvalidCarNameException e) {
+			Display.show(Message.NAME);
+		} catch (CarsSaveException e) {
+			Display.show(Message.ERROR_SAVE_CARS);
+			game.end();
+		}
+		return false;
 	}
 
 	public List<Car> toCars(String text) {

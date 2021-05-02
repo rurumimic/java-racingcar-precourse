@@ -11,8 +11,9 @@ import racingcar.Game;
 import racingcar.Lap;
 import racingcar.Rounds;
 import racingcar.enums.Message;
+import racingcar.exceptions.LapsSaveException;
 import racingcar.io.Display;
-import racingcar.tool.Dice;
+import racingcar.dice.Dice;
 
 public class RaceState implements State {
 
@@ -32,13 +33,10 @@ public class RaceState implements State {
 		Display.show(Message.START);
 		race(standby());
 
-		if (!saveLaps(this.laps)) {
-			Display.show(Message.ERROR_SAVE_LAPS);
-			game.end();
+		if (saveLaps(this.laps)) {
+			game.podium();
 			return;
 		}
-
-		game.podium();
 	}
 
 	private void race(Lap lineup) {
@@ -48,7 +46,7 @@ public class RaceState implements State {
 
 	private void circuit(Map<Car, Distance> prev) {
 		for (int i = 0; i < rounds.getValue(); i++) {
-			Lap lap = drive(prev);
+			Lap lap = drive(prev, new Dice());
 			prev = lap.getRecord();
 			laps.add(lap);
 			Display.broadcast(lap);
@@ -63,16 +61,23 @@ public class RaceState implements State {
 		return new Lap(record);
 	}
 
-	public Lap drive(Map<Car, Distance> prev) {
+	public Lap drive(Map<Car, Distance> prev, Dice dice) {
 		Map<Car, Distance> record = new HashMap<>();
 		for (Car car : cars) {
-			record.put(car, prev.get(car).add(Dice.roll()));
+			record.put(car, prev.get(car).add(dice.roll()));
 		}
 		return new Lap(record);
 	}
 
 	public boolean saveLaps(List<Lap> laps) {
-		return game.storage().saveLaps(laps);
+		try {
+			game.storage().saveLaps(laps);
+			return true;
+		} catch (LapsSaveException e) {
+			Display.show(Message.ERROR_SAVE_LAPS);
+			game.end();
+		}
+		return false;
 	}
 
 }

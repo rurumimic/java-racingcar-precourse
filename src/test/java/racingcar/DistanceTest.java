@@ -8,11 +8,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import racingcar.enums.Message;
+import racingcar.exceptions.DistanceOutOfBoundsException;
+
 public class DistanceTest {
 
 	@DisplayName("이동 거리 초기화")
 	@Test
-	void create() {
+	void initDistance() {
 		Distance distance = new Distance();
 		assertThat(distance.getValue()).isEqualTo(0);
 	}
@@ -20,7 +23,7 @@ public class DistanceTest {
 	@DisplayName("이동 거리 생성")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3})
-	void success(int number) {
+	void newDistance(int number) {
 		Distance distance = new Distance(number);
 		assertThat(distance.getValue()).isEqualTo(number);
 	}
@@ -28,10 +31,10 @@ public class DistanceTest {
 	@DisplayName("이동 거리 생성 실패")
 	@ParameterizedTest
 	@ValueSource(ints = {-1, -2, -3})
-	void fail(int number) {
-		assertThatIllegalArgumentException().isThrownBy(() -> {
+	void failNewDistance(int number) {
+		assertThatExceptionOfType(DistanceOutOfBoundsException.class).isThrownBy(() -> {
 			new Distance(number);
-		});
+		}).withMessage(Message.DISTANCE_RANGE.toString());
 	}
 
 	@DisplayName("이동 거리 합")
@@ -46,7 +49,7 @@ public class DistanceTest {
 	@DisplayName("이동 거리 표시")
 	@ParameterizedTest
 	@CsvSource(value = {"1:-", "3:---"}, delimiter = ':')
-	void graph(int number, String text) {
+	void print(int number, String text) {
 		assertThat(new Distance().toString()).isEqualTo("");
 		assertThat(new Distance(number).toString()).isEqualTo(text);
 	}
@@ -54,7 +57,7 @@ public class DistanceTest {
 	@DisplayName("이동 거리 비교")
 	@ParameterizedTest
 	@CsvSource(value = {"1:0", "0:1", "2:-1"}, delimiter = ':')
-	void compare(int value, int expected) {
+	void compareTo(int value, int expected) {
 		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);
 		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);
 		assertThat(new Distance(1).compareTo(new Distance(value))).isEqualTo(expected);

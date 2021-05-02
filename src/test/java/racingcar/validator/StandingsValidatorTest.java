@@ -19,17 +19,18 @@ public class StandingsValidatorTest {
 		assertThat(validator.alert()).isEqualTo(Message.STANDINGS);
 	}
 
-	@DisplayName("정규표현식 통과")
+	@DisplayName("통과: 영어 소문자 + 쉼표")
 	@ParameterizedTest
 	@ValueSource(strings = {"a,b", "a,b,c"})
-	void success(String text) {
+	void valid(String text) {
 		assertThat(validator.isValid(text)).isTrue();
 	}
 
-	@DisplayName("정규표현식 실패")
+	@DisplayName("실패: 공백 포함")
 	@ParameterizedTest
 	@ValueSource(strings = {"", "a,", ",a", "a,b,", "a,,b"})
-	void fail(String text) {
+	void invalid(String text) {
+		System.out.println(text);
 		assertThat(validator.isValid(text)).isFalse();
 	}
 }

@@ -25,19 +25,38 @@ public class RegisterStateTest {
 		registerState = new RegisterState(game);
 	}
 
-	@DisplayName("자동차 이름 확인")
+	@DisplayName("통과: 0 < (영어 소문자 1 ~ 5) <= 20")
 	@ParameterizedTest
-	@ValueSource(strings = {"a,b", "a,b,c"})
+	@ValueSource(strings = {"a,b", "abcde,z", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t"})
 	void valid(String text) {
 		assertThat(registerState.validate(text)).isTrue();
 	}
 
-	@DisplayName("자동차 이름 불가")
+	@DisplayName("실패")
 	@ParameterizedTest
-	@ValueSource(strings = {"", "a", "a,", ",a", "a,b,", "a,,b", "a,,b,", "a,abcdef",
-		"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u"})
+	@ValueSource(strings = {
+		"", "a,", ",a", "a,b,", "a,,b", // Standings
+		"a", "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u", // Pitstop
+		"a,a", // Duplication
+		"a,abcdef" // Names
+	})
 	void invalid(String text) {
 		assertThat(registerState.validate(text)).isFalse();
+	}
+
+	@DisplayName("자동차 이름 저장 성공")
+	@ParameterizedTest
+	@ValueSource(strings = {"a,b"})
+	void saveCars(String text) {
+		assertThat(registerState.saveCars(text)).isTrue();
+	}
+
+	@DisplayName("자동차 이름 저장 실패")
+	@ParameterizedTest
+	@ValueSource(strings = {"a,b"})
+	void failSaveCars(String text) {
+		assertThat(registerState.saveCars(text)).isTrue();
+		assertThat(registerState.saveCars(text)).isFalse();
 	}
 
 	@DisplayName("자동차 목록 생성")
@@ -52,11 +71,4 @@ public class RegisterStateTest {
 		assertThat(cars.get(0).getName()).isEqualTo(origin.get(0).getName());
 	}
 
-	@DisplayName("자동차 이름 저장")
-	@ParameterizedTest
-	@ValueSource(strings = {"a,b"})
-	void saveCars(String text) {
-		assertThat(registerState.saveCars(registerState.toCars(text))).isTrue();
-		assertThat(registerState.saveCars(registerState.toCars(text))).isFalse();
-	}
 }

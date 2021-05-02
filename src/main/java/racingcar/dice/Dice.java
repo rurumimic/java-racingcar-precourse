@@ -1,22 +1,22 @@
-package racingcar.tool;
+package racingcar.dice;
 
 import java.util.Random;
 
 import racingcar.Distance;
 import racingcar.enums.Engine;
 
-public final class Dice {
+public class Dice {
 
-	private static boolean shiftGears() {
+	private boolean shiftGears() {
 		Random random = new Random();
 		return random.nextInt(Engine.RPM.getValue()) > Engine.CLUTCH.getValue();
 	}
 
-	public static Distance roll() {
+	public Distance roll() {
 		if (shiftGears()) {
 			return new Distance(Engine.PEDAL.getValue());
 		}
-		return new Distance();
+		return new Distance(Engine.BRAKES.getValue());
 	}
 
 }
