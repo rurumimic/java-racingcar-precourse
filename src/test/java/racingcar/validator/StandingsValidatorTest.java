@@ -30,7 +30,6 @@ public class StandingsValidatorTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"", "a,", ",a", "a,b,", "a,,b"})
 	void invalid(String text) {
-		System.out.println(text);
 		assertThat(validator.isValid(text)).isFalse();
 	}
 }
